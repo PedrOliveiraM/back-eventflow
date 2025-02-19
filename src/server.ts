@@ -10,7 +10,8 @@ import {
 } from 'fastify-type-provider-zod'
 import { env } from './env'
 import { accessInviteLinkRoute } from './routes/access-invite-link-route'
-import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
+import { getSubscriberInviteClicksRoute } from './routes/get-subscriber-invite-clicks-route'
+import { subscriberToEventRoute } from './routes/subscribe-to-event-route'
 
 const port = 3333
 
@@ -34,8 +35,9 @@ app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
 
-app.register(subscribeToEventRoute)
+app.register(subscriberToEventRoute)
 app.register(accessInviteLinkRoute)
+app.register(getSubscriberInviteClicksRoute)
 
 app.listen({ port: env.PORT }).then(() => {
   console.log(`Server running on ${port}`)

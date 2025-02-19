@@ -2,7 +2,7 @@ import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { subscribeToEvent } from '../functions/subscribe-to-event'
 
-export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
+export const subscriberToEventRoute: FastifyPluginAsyncZod = async app => {
   app.post(
     '/subscribe-to-event',
     {
@@ -13,6 +13,7 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
         body: z.object({
           name: z.string(),
           email: z.string().email(),
+          refferer: z.string().nullish(),
         }),
         response: {
           201: z.object({
@@ -22,9 +23,9 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
       },
     },
     async (request, reply) => {
-      const { name, email } = request.body
+      const { name, email, refferer } = request.body
 
-      const { subscriberId } = await subscribeToEvent({ name, email })
+      const { subscriberId } = await subscribeToEvent({ name, email, refferer })
 
       return reply.status(201).send({ subscriberId })
     }
