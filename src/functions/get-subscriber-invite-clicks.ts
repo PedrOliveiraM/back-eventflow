@@ -3,7 +3,7 @@ import { redis } from '../redis/client'
 interface SubscriberInivteClicksParams {
   subscriberId: string
 }
-
+// quantas vezes o usuário clicou no link de indicação
 export async function getSubscriberInviteClicks({
   subscriberId,
 }: SubscriberInivteClicksParams) {

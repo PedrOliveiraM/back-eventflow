@@ -8,7 +8,7 @@ interface SubscriberToEventParams {
   email: string
   reffererId?: string | null
 }
-
+// inscrever-se no evento
 export async function subscribeToEvent({
   name,
   email,
@@ -34,7 +34,7 @@ export async function subscribeToEvent({
     .returning()
 
   if (reffererId) {
-    await redis.zincrby('referral:ranking', 1, reffererId)
+    const result = await redis.zincrby('referral:ranking', 1, reffererId)
   }
 
   const subscriber = result[0]

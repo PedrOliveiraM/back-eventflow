@@ -3,7 +3,7 @@ import { redis } from '../redis/client'
 interface SubscriberInivtesCountParams {
   subscriberId: string
 }
-
+// quantas indicações o usuário tem 
 export async function getSubscriberInvitesCount({
   subscriberId,
 }: SubscriberInivtesCountParams) {
