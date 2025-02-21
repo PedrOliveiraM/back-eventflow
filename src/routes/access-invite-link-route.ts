@@ -11,7 +11,8 @@ export const accessInviteLinkRoute: FastifyPluginAsyncZod = async app => {
       schema: {
         summary: 'Access invite link and redirect user',
         tags: ['referral'],
-        description: 'this route will redirect the user to the event page',
+        description:
+          'when user access link by idication, this route will redirect the user to the event page',
         params: z.object({
           subscriberId: z.string(),
         }),

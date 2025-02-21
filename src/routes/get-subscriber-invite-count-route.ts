@@ -1,16 +1,17 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { getSubscriberInviteClicks } from '../functions/get-subscriber-invite-clicks'
+import { getSubscriberInvitesCount } from '../functions/get-subscriber-invite-count'
 
-export const getSubscriberInviteClicksRoute: FastifyPluginAsyncZod =
+export const getSubscriberInviteCountRoute: FastifyPluginAsyncZod =
   async app => {
     app.get(
-      '/subscribers/:subscriberId/ranking/clicks',
+      '/subscribers/:subscriberId/ranking/count',
       {
         schema: {
-          summary: 'Get the number of clicks on the subscribers invitation',
-          tags: ['subscribers'],
-          description: 'this route will recive the number of clicks',
+          summary: 'Get the number of invited subscribers',
+          tags: ['referral'],
+          description:
+            'this route will recive the number of invites by a subscriberID',
           params: z.object({
             subscriberId: z.string(),
           }),
@@ -24,7 +25,7 @@ export const getSubscriberInviteClicksRoute: FastifyPluginAsyncZod =
       async request => {
         const { subscriberId } = request.params
 
-        const { count } = await getSubscriberInviteClicks({ subscriberId })
+        const { count } = await getSubscriberInvitesCount({ subscriberId })
 
         return { count }
       }
